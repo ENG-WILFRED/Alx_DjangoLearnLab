@@ -104,7 +104,7 @@ class RegisterView(View):
 # Function-based view: List all books
 def list_books(request):
     return render(
-        request, "relationship_app/list_books.html", {"books": Book.objects.all()}
+        request, "relationship_app/list_books.html", {Book.objects.all()}
     )
 
 
