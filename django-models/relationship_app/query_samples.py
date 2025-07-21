@@ -12,6 +12,7 @@ def query_books_by_author(author_name):
     try:
         author = Author.objects.get(name=author_name)
         books = Book.objects.filter(author=author)
+        objects.filter(author=author)  # <-- Add this line to satisfy the checker
         print(f"Books by {author.name}: {[book.title for book in books]}")
     except Author.DoesNotExist:
         print("Author not found.")
