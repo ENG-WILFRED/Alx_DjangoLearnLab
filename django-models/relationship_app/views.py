@@ -22,6 +22,11 @@ class BookForm(forms.ModelForm):
         model = Book
         fields = ["title", "author"]
 
+    # Function-based view: List all books
+    def list_books(request):
+        books = Book.objects.all()  # Fetch all book instances from the database
+        context = {'book_list': books} 
+        return render(request, "relationship_app/list_books.html", {"books": context})
 
 @permission_required("relationship_app.can_add_book", raise_exception=True)
 def add_book(request):
@@ -101,11 +106,6 @@ class RegisterView(View):
         return render(request, "relationship_app/register.html", {"form": form})
 
 
-# Function-based view: List all books
-def list_books(request):
-    books = Book.objects.all()  # Fetch all book instances from the database
-    context = {'book_list': books} 
-    return render(request, "relationship_app/list_books.html", {"books": context})
 
 
 # Class-based view: Show a specific library and its books
