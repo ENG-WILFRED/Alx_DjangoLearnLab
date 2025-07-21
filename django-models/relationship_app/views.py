@@ -22,11 +22,13 @@ class BookForm(forms.ModelForm):
         model = Book
         fields = ["title", "author"]
 
-    # Function-based view: List all books
-    def list_books(request):
-        books = Book.objects.all()  # Fetch all book instances from the database
-        context = {'book_list': books} 
-        return render(request, "relationship_app/list_books.html", {"books": context})
+
+# Function-based view: List all books
+def list_books(request):
+    books = Book.objects.all()  # Fetch all book instances from the database
+    context = {'books': books}  # Use 'books' as the key, matching your template
+    return render(request, "relationship_app/list_books.html", context)
+
 
 @permission_required("relationship_app.can_add_book", raise_exception=True)
 def add_book(request):
@@ -104,8 +106,6 @@ class RegisterView(View):
             login(request, user)  # auto-login after registration
             return redirect("list_books")
         return render(request, "relationship_app/register.html", {"form": form})
-
-
 
 
 # Class-based view: Show a specific library and its books
