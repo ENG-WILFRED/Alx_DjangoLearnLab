@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-q)eh6m^voabevx!6&68%=a*15ngv8=2@+6_2*o83%+)5!=nr98'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False  # Set to False in production
 
 ALLOWED_HOSTS = []
 
@@ -125,3 +125,18 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = 'list_books'
 LOGOUT_REDIRECT_URL = 'login'
+
+SECURE_BROWSER_XSS_FILTER = True  # Enables the X-XSS-Protection header
+X_FRAME_OPTIONS = 'DENY'  # Prevents clickjacking
+SECURE_CONTENT_TYPE_NOSNIFF = True  # Prevents the browser from guessing content types
+
+CSRF_COOKIE_SECURE = True  # Ensures CSRF cookies are sent over HTTPS only
+SESSION_COOKIE_SECURE = True  # Ensures session cookies are sent over HTTPS only
+
+# Content Security Policy (CSP) - using django-csp if installed
+INSTALLED_APPS += ['csp']
+MIDDLEWARE += ['csp.middleware.CSPMiddleware']
+CSP_DEFAULT_SRC = ("'self'",)
+CSP_SCRIPT_SRC = ("'self'",)
+CSP_STYLE_SRC = ("'self'",)
+MIDDLEWARE += ['LibraryProject.middleware.ContentSecurityPolicyMiddleware']
