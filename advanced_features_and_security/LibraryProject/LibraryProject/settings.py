@@ -148,3 +148,5 @@ CSP_DEFAULT_SRC = ("'self'",)
 CSP_SCRIPT_SRC = ("'self'",)
 CSP_STYLE_SRC = ("'self'",)
 MIDDLEWARE += ['LibraryProject.middleware.ContentSecurityPolicyMiddleware']
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')  # Trust X-Forwarded-Proto header for HTTPS
