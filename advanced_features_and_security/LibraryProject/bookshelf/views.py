@@ -16,6 +16,7 @@ from django.contrib.auth.decorators import permission_required
 from django.http import HttpResponse
 from .models import Book, Author
 from django import forms
+from .forms import ExampleForm
 
 
 # Form to use in add/edit views
