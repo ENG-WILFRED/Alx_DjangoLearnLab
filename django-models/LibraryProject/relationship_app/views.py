@@ -86,6 +86,8 @@ class RegisterView(View):
         return render(request, 'relationship_app/register.html', {'form': form})
 
 
+register = RegisterView.as_view()
+
 # Function-based view: List all books
 def list_books(request):
     books = Book.objects.all()
