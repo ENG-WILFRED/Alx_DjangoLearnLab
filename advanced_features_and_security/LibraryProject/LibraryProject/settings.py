@@ -126,12 +126,20 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = 'list_books'
 LOGOUT_REDIRECT_URL = 'login'
 
-SECURE_BROWSER_XSS_FILTER = True  # Enables the X-XSS-Protection header
+SECURE_BROWSER_XSS_FILTER = True  # Enables the XSS-Protection header
 X_FRAME_OPTIONS = 'DENY'  # Prevents clickjacking
 SECURE_CONTENT_TYPE_NOSNIFF = True  # Prevents the browser from guessing content types
 
 CSRF_COOKIE_SECURE = True  # Ensures CSRF cookies are sent over HTTPS only
 SESSION_COOKIE_SECURE = True  # Ensures session cookies are sent over HTTPS only
+
+# Redirect all HTTP requests to HTTPS
+SECURE_SSL_REDIRECT = True  # Ensures all requests are redirected to HTTPS
+
+# HTTP Strict Transport Security (HSTS)
+SECURE_HSTS_SECONDS = 31536000  # Instructs browsers to only use HTTPS for 1 year
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True  # Applies HSTS to all subdomains
+SECURE_HSTS_PRELOAD = True  # Allows site to be included in browsers' HSTS preload list
 
 # Content Security Policy (CSP) - using django-csp if installed
 INSTALLED_APPS += ['csp']

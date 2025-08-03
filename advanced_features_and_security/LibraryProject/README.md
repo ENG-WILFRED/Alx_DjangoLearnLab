@@ -35,3 +35,24 @@ It includes basic Django configuration and runs the server at http://127.0.0.1:8
 Test forms for CSRF protection (submitting without a token should fail).  
 Try injecting scripts in form fields to check for XSS (should be escaped).  
 Attempt to access views with insufficient permissions to verify access control.
+
+# Security Review: HTTPS and Secure Redirects
+
+## Implemented Measures
+
+- **SECURE_SSL_REDIRECT:** Forces all HTTP requests to HTTPS.
+- **HSTS (SECURE_HSTS_SECONDS, SECURE_HSTS_INCLUDE_SUBDOMAINS, SECURE_HSTS_PRELOAD):** Instructs browsers to only use HTTPS, including subdomains, and allows preloading.
+- **SESSION_COOKIE_SECURE & CSRF_COOKIE_SECURE:** Ensures cookies are only sent over HTTPS.
+- **X_FRAME_OPTIONS, SECURE_CONTENT_TYPE_NOSNIFF, SECURE_BROWSER_XSS_FILTER:** Protect against clickjacking, MIME sniffing, and XSS.
+- **Nginx/Apache config:** Redirects all HTTP traffic to HTTPS and serves the site securely.
+
+## Recommendations
+
+- Always use strong, valid SSL/TLS certificates.
+- Regularly review and update security settings.
+- Test your deployment with tools like [SSL Labs](https://www.ssllabs.com/ssltest/) and [securityheaders.com](https://securityheaders.com/).
+
+## Potential Improvements
+
+- Implement HTTP Public Key Pinning (HPKP) if required.
+- Use a Web Application Firewall (WAF) for additional protection.
